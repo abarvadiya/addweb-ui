@@ -14,7 +14,7 @@ export const uploadFile = async (file: File, filePath: string) => {
   });
 
   const s3Params: UploadFileParams = {
-    Bucket: process.env.S3_BUCKET_NAME || "",
+    Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME || "",
     Key: filePath,
     Body: convertToBlob,
     ContentType: file.type,
@@ -23,27 +23,10 @@ export const uploadFile = async (file: File, filePath: string) => {
   return result;
 };
 
-// new Promise((resolve, reject) => {
-//   const ContentType =
-//     typeof file === "string" ? "text/plain" : "application/octet-stream";
-//   const params: UploadFileParams = {
-//     Bucket: process.env.S3_BUCKET_NAME || "",
-//     Key: filePath,
-//     Body: file,
-//     ContentType,
-//   };
-//   s3Client.upload(params, (err: Error, data: S3.ManagedUpload.SendData) => {
-//     if (err) {
-//       reject(err);
-//     }
-//     resolve(data);
-//   });
-// });
-
 export const deleteFile = (fileKey: string): Promise<S3.DeleteObjectOutput> =>
   new Promise((resolve, reject) => {
     const params = {
-      Bucket: process.env.S3_BUCKET_NAME || "",
+      Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME || "",
       Key: fileKey,
     };
     s3Client.deleteObject(params, (err: Error, data: S3.DeleteObjectOutput) => {

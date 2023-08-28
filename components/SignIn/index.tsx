@@ -18,6 +18,7 @@ const SignIn = () => {
       try {
         const { data }: any = await signInRequest(values);
         if (data) {
+          formik.resetForm();
           localStorage.setItem("accessToken", data.data.accessToken);
           localStorage.setItem("refreshToken", data.data.refreshToken);
           router.push("/");
@@ -84,7 +85,7 @@ const SignIn = () => {
               variant="subtitle2"
               gutterBottom
             >
-              Don't have an account? Sign Up
+              Don&apos;t have an account? Sign Up
             </Typography>
           </Link>
         </Box>

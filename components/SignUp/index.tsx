@@ -34,18 +34,18 @@ const SignUp = () => {
 
         const fileName = generateFilename("png");
 
-        // const fileLog = await uploadFile(selectedFile, fileName);
-
-        // console.log(fileLog, ">>>");
+        const { Location } = await uploadFile(selectedFile, fileName);
 
         const { confirmPassword, ...requestData } = values;
 
         const { data }: any = await signUpRequest({
           ...requestData,
           profilePic:
+            Location ||
             "https://kurntt.com/storage/page/2949b649120803909359595219ef9bc3_1645144593_300px.jpg",
         });
         if (data) {
+          formik.resetForm();
           toast.success("Account created successfully");
           router.push("/signin");
         }
